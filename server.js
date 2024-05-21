@@ -9,7 +9,9 @@ app.engine('hbs', hbs({ extname: 'hbs', layoutsDir: './layouts', defaultLayout: 
 app.set('view engine', '.hbs');
 app.engine('.hbs', hbs());
 
+
 app.use(express.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, '/public')));
 app.use(express.json());
 
 
@@ -22,7 +24,7 @@ app.post('/contact/send-message', upload.single("projectFile"), (req, res) => {
   const file = req.file;
 
   if(author && sender && title && file && message) {
-    res.render('contact', { isSent: true, fileName: file.originalname  });
+    res.render('contact', { isSent: true, fileName: file.originalname });
   }
   else {
     res.render('contact', { isError: true });
@@ -30,12 +32,9 @@ app.post('/contact/send-message', upload.single("projectFile"), (req, res) => {
 
 });
 
-
 app.get('/hello/:name', (req, res) => {
   res.render('hello', { layout: false, name: req.params.name });
 });
-
-app.use(express.static(path.join(__dirname, '/public')));
 
 app.get('/user', (req, res) => {
     res.render('forbidden');
@@ -57,20 +56,17 @@ app.get('/history', (req, res) => {
   res.render('history',);
 });
 
-
-
 app.get('/home', (req, res) => {
     res.render('home',);
 });
   
-
 app.get('/about', (req, res) => {
   res.render('about',);
 });
 
 app.get('/test.png', (req, res) => {
     res.sendFile(path.join(__dirname, '/public/test.png'));
-  });
+});
  
 app.get((req, res, next) => {
     res.status(404).sendFile(path.join(__dirname, 'views/404'));
