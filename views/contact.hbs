@@ -1,16 +1,16 @@
 <h2>Contact me</h2>
-<form action="/contact/send-message" method="POST" enctype="multipart/form-data"></form>
-<div>
-    {{#if isSent}}
-    The message has been sent!
-    File '{{fileName}}' has been saved!
-    {{/if}}
-</div>
-<div>
-    {{#if isError}}
-    You can't leave fields empty!
-    {{/if}}
-</div>
+<form action="/contact/send-message" method="POST" enctype="multipart/form-data">
+  <div>
+      {{#if isSent}}
+      The message has been sent!
+      File '{{fileName}}' has been saved!
+      {{/if}}
+  </div>
+  <div>
+      {{#if isError}}
+      You can't leave fields empty!
+      {{/if}}
+  </div>
   <label>
     Your name: <input type="text" name="author">
   </label>
